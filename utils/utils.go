@@ -4,12 +4,13 @@ import (
 	"encoding/json"
 	"log"
 	"os"
+	"strings"
 
 	"gopkg.in/yaml.v3"
 	"www.github.com/ah-naf/urlshort/models"
 )
 
-func ParseYaml(filePath string) []models.Config {
+func ParseFile(format, filePath string) []models.Config {
 	file, err := os.Open(filePath)
 	if err != nil {
 		log.Fatalf("Error opening file: %v\n", err)
@@ -18,33 +19,19 @@ func ParseYaml(filePath string) []models.Config {
 
 	var configs []models.Config
 
-	decoder := yaml.NewDecoder(file)
-	err = decoder.Decode(&configs)
-	if err != nil {
-		log.Fatalf("Error decoding YAML: %v\n", err)
+	format = strings.ToLower(format)
+	if format == "yaml" {
+		decoder := yaml.NewDecoder(file)
+		err = decoder.Decode(&configs)
+	} else if format == "json" {
+		decoder := json.NewDecoder(file)
+		err = decoder.Decode(&configs)
+	} else {
+		log.Fatalln("Invalid config type.")
 	}
 
-	// Output the parsed data
-	// for i, config := range configs {
-	// 	fmt.Printf("Config %d: %+v\n", i+1, config)
-	// }
-	return configs
-}
-
-func ParseJSON(filePath string) []models.Config {
-	file, err := os.Open(filePath)
 	if err != nil {
-		log.Fatalf("Error opening file: %v\n", err)
-	}
-	defer file.Close()
-
-	var configs []models.Config
-
-	decoder := json.NewDecoder(file)
-	err = decoder.Decode(&configs)
-
-	if err != nil {
-		log.Fatalf("Error decoding JSON: %v\n", err)
+		log.Fatalf("Error decoding %s: %v\n", strings.ToUpper(format), err)
 	}
 
 	return configs
