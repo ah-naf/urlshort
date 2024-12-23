@@ -2,4 +2,4 @@ module www.github.com/ah-naf/urlshort
 
 go 1.22.10
 
-require gopkg.in/yaml.v3 v3.0.1 // indirect
+require gopkg.in/yaml.v3 v3.0.1
