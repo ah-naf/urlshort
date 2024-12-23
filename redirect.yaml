@@ -1,0 +1,6 @@
+- path: "/some/local/path1"
+  url: "https://example1.com"
+- path: "/some/local/path2"
+  url: "https://example2.com"
+- path: "/some/local/path3"
+  url: "https://example3.com"
