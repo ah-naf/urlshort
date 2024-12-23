@@ -1,10 +1,16 @@
 - path: "/google"
-  url: "https://www.google.com"
+  url: "https://www.google.com" # Valid
 - path: "/github"
-  url: "https://github.com"
+  url: "https://github.com" # Valid
 - path: "/stackoverflow"
-  url: "https://stackoverflow.com"
+  url: "https://stackoverflow.com" # Valid
 - path: "/youtube"
-  url: "https://www.youtube.com"
+  url: "www.youtube.com" # Missing "https://"
 - path: "/twitter"
-  url: "https://twitter.com"
+  url: "htt://twitter.com" # Incorrect scheme
+- path: "/invalid1"
+  url: "ht@tp://invalid-url" # Invalid characters in URL
+- path: "/invalid2"
+  url: "https://example..com" # Double dots in domain
+- path: "/noscheme"
+  url: "example.com" # Missing scheme
